@@ -1,11 +1,8 @@
 #!/bin/sh
 
-STAT=$(amixer get Master | tail -n1 | sed -r "s/.*\[(.*)\]/\1/")
-VOL=$(amixer get Master | tail -n1 | awk '{print $(NF-1)}')
-
-if [ "$STAT" = "off" ]
+if [ $(pulsemixer --get-mute) = "1" ]
 then
 	echo "off"
 else
-	echo "${VOL//[\[\]%]/}%"
+	echo $(pulsemixer --get-volume | awk '{print $1}')%
 fi
