@@ -1,2 +1,5 @@
-#!/bin/sh
-setxkbmap -query | awk '/layout/{print $2}'
+#!/bin/bash
+
+keyboard() {
+	setxkbmap -query | awk '/layout/{print $2}'
+}

@@ -1,8 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
-DIR=$(dirname "$(readlink -f "$0")")
-SCRIPT="$DIR/script"
+source "${BASH_SOURCE%/*}/script/btstate.sh"
+source "${BASH_SOURCE%/*}/script/keyboard.sh"
+source "${BASH_SOURCE%/*}/script/mic.sh"
+source "${BASH_SOURCE%/*}/script/power.sh"
+source "${BASH_SOURCE%/*}/script/volume.sh"
 
-echo "[ Vol: $($SCRIPT/volume.sh) | Mic: $($SCRIPT/mic.sh) | kb: $($SCRIPT/keyboard.sh) ] $(date) "
-
-sleep 0.2s
+bar() {
+	DIR=$(dirname "$(readlink -f "$0")")
+	SCRIPT="$DIR/script"
+	echo "[ Vol: $(volume) | Mic: $(mic) | kb: $(keyboard) ] $(date) ($(power)$(btstate))"
+}
